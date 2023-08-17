@@ -1,0 +1,29 @@
+version: "3"
+
+volumes:
+  db: {}
+  elasticsearch: {}
+
+services:
+  db:
+    container_name: postgresql
+    image: postgres:15
+    volumes: 
+      - db:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_PASSWORD=password
+      - TZ='UTC'
+    ports:
+      - 5432:5432
+
+  elasticsearch:
+    container_name: elasticsearch
+    image: docker.elastic.co/elasticsearch/elasticsearch:8.4.3
+    environment:
+      ES_JAVA_OPTS: -Xms1g -Xmx1g
+      xpack.security.enabled: false
+      discovery.type: single-node
+      bootstrap.memory_lock: true
+      TZ: Asia/Baku
+    ports:
+      - 9200:9200
