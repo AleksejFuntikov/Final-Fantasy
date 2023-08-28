@@ -1,17 +1,18 @@
+# frozen_string_literal: true
+
 class ArticlesController < ApplicationController
-  
-  http_basic_authenticate_with name: "dhh", password: "secret", except: [:index, :show]
-  
+  http_basic_authenticate_with name: 'dhh', password: 'secret', except: %i[index show]
+
   def index
     @articles = Article.page(params[:page]).per(25)
   end
 
-  def show 
+  def show
     @article = Article.find(params[:id])
   end
 
   def new
-    @article = Article.new 
+    @article = Article.new
   end
 
   def create
@@ -25,10 +26,10 @@ class ArticlesController < ApplicationController
   end
 
   def edit
-    @article = Article.find(params[:id]) 
+    @article = Article.find(params[:id])
   end
 
-  def update 
+  def update
     @article = Article.find(params[:id])
 
     if @article.update(article_params)
@@ -40,14 +41,14 @@ class ArticlesController < ApplicationController
 
   def destroy
     @article = Article.find(params[:id])
-    @article.destroy 
-    
+    @article.destroy
+
     redirect_to root_path, status: :see_other
   end
-  
-  private 
-    def article_params
-      params.require(:article).permit(:title, :body, :status)
-    end
-  
+
+  private
+
+  def article_params
+    params.require(:article).permit(:title, :body, :status)
+  end
 end
