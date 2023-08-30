@@ -1,12 +1,26 @@
-<%= form_with model: [ @article, @article.comments.build ] do |form| %>
+<%= form_with model: [ @article, @comment ], id: "comment_form" do |form| %>
   <p>
     <%= form.label :commenter %><br>
     <%= form.text_field :commenter %>
+    <% if @comment.errors[:commenter].any? %>
+      <ul class="errors">
+        <% @comment.errors.full_messages_for(:commenter).each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    <% end %>
   </p>
 
   <p>
     <%= form.label :body %><br>
-    <%= form.text_area :body%>
+    <%= form.text_area :body %>
+    <% if @comment.errors[:body].any? %>
+      <ul class="errors">
+        <% @comment.errors.full_messages_for(:body).each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    <% end %>
   </p>
 
   <p>

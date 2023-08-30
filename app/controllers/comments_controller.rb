@@ -5,10 +5,18 @@ class CommentsController < ApplicationController
   before_action :find_article, only: [:create, :destroy]
 
   def create
-    @comment = @article.comments.create(comment_params)
-
-    redirect_to article_path(@article)
+    @comment = @article.comments.build(comment_params)
+    if @comment.save
+      redirect_to article_path(@article)
+    else
+      respond_to do |format|
+        format.turbo_stream { render turbo_stream: turbo_stream.replace(@comment, partial: 'comments/form', locals: { comment: @comment }) }
+        format.html { render "articles/show" }
+      end
+    end
   end
+  
+  
 
   def destroy
     @comment = @article.comments.find(params[:id])
