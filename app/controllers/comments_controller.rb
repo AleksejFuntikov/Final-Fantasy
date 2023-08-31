@@ -1,8 +1,7 @@
 # frozen_string_literal: true
 
 class CommentsController < ApplicationController
-
-  before_action :find_article, only: [:create, :destroy]
+  before_action :find_article, only: %i[create destroy]
 
   def create
     @comment = @article.comments.build(comment_params)
@@ -11,7 +10,10 @@ class CommentsController < ApplicationController
     else
       puts "Rendering turbo stream..."
       respond_to do |format|
-        format.turbo_stream { render turbo_stream: turbo_stream.replace("comment_form", partial: 'comments/form', locals: { comment: @comment }) }
+        format.turbo_stream do
+          render turbo_stream: turbo_stream.replace("comment_form", partial: "comments/form",
+                                                                    locals: { comment: @comment })
+        end
         format.html { render "articles/show" }
       end
     end
@@ -26,7 +28,7 @@ class CommentsController < ApplicationController
 
   private
 
-  def find_article 
+  def find_article
     @article = Article.find(params[:article_id])
   end
 

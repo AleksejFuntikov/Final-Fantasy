@@ -1,8 +1,7 @@
 # frozen_string_literal: true
 
 class ArticlesController < ApplicationController
-  
-  before_action :find_article, only: [:show, :edit, :update, :destroy]
+  before_action :find_article, only: %i[show edit update destroy]
   rescue_from ActiveRecord::RecordNotFound, with: :article_not_found
 
   def index
@@ -48,7 +47,7 @@ class ArticlesController < ApplicationController
   def find_article
     @article = Article.find(params[:id])
   end
-  
+
   def article_not_found
     redirect_to articles_path, alert: "Article not found"
   end
