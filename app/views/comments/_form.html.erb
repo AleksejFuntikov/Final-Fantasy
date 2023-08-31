@@ -1,34 +1,25 @@
 <%= form_with model: [ @article, @comment ], id: "comment_form" do |form| %>
-  <p>
+  <div>
     <%= form.label :commenter %><br>
     <%= form.text_field :commenter %>
     <% if @comment.errors[:commenter].any? %>
-      <ul class="errors">
-        <% @comment.errors.full_messages_for(:commenter).each do |message| %>
-          <li><%= message %></li>
-        <% end %>
-      </ul>
+      <% @comment.errors.full_messages_for(:commenter).each do |message| %>
+        <div class="errors"><%= message %></div>
+      <% end %>
     <% end %>
-  </p>
+  </div>
 
-  <p>
+  <div>
     <%= form.label :body %><br>
     <%= form.text_area :body %>
     <% if @comment.errors[:body].any? %>
-      <ul class="errors">
-        <% @comment.errors.full_messages_for(:body).each do |message| %>
-          <li><%= message %></li>
-        <% end %>
-      </ul>
+      <% @comment.errors.full_messages_for(:body).each do |message| %>
+        <div class="errors"><%= message %></div>
+      <% end %>
     <% end %>
-  </p>
+  </div>
 
-  <p>
-    <%= form.label :status %><br>
-    <%= form.select :status, [ "public", "private", "archived" ], selected: "public" %>
-  </p>
-
-  <p>
+  <div>
     <%= form.submit %>
-  </p>
+  </div>
 <% end %>

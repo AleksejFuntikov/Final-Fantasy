@@ -10,9 +10,8 @@ class ArticlesController < ApplicationController
   end
 
   def show
-    @comment = @article.comments.build
+    @comment = @article.comments.new
   end
-  
 
   def new
     @article = Article.new

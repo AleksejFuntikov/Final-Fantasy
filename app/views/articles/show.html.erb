@@ -9,7 +9,7 @@
 </ul>
 
 <h2>Comments</h2>
-  <%= render @article.comments %>
+  <%= render @article.comments.where.not(id: nil) %>
 
 <h2>Add a comment</h2>
   <%= render "comments/form" %>

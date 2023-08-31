@@ -7,6 +7,6 @@ Rails.application.routes.draw do
   # get "/articles/:id", to: "articles#show"
 
   resources :articles do
-    resources :comments
+    resources :comments, only: [:create, :destroy]
   end
 end
