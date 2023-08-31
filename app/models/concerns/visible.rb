@@ -3,19 +3,13 @@
 module Visible
   extend ActiveSupport::Concern
 
-  VALID_STATUSES = %w[public private archived].freeze
-
   included do
-    validates :status, inclusion: { in: VALID_STATUSES }
+    enum status: { published: 0, privated: 1, archived: 2 }
   end
 
   class_methods do
     def public_count
-      where(status: "public").count
+      public.count
     end
-  end
-
-  def archived?
-    status == "archived"
   end
 end

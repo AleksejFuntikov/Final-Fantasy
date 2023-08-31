@@ -18,8 +18,8 @@ class CommentsController < ApplicationController
   end
 
   def destroy
-    @comment = @article.comments.find(params[:id])
-    @comment.destroy
+    comment = @article.comments.find(params[:id])
+    comment.destroy
 
     redirect_to article_path(@article), status: :see_other
   end

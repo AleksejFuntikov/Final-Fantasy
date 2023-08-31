@@ -6,7 +6,7 @@ class ArticlesController < ApplicationController
   rescue_from ActiveRecord::RecordNotFound, with: :article_not_found
 
   def index
-    @articles = Article.where(status: "public").page(params[:page]).per(25)
+    @articles = Article.published.page(params[:page]).per(25)
   end
 
   def show
