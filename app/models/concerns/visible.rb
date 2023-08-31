@@ -4,12 +4,7 @@ module Visible
   extend ActiveSupport::Concern
 
   included do
-    enum status: { published: 0, privated: 1, archived: 2 }
-  end
-
-  class_methods do
-    def public_count
-      public.count
-    end
+    enum status: { "published" => "published", "privated" => "privated", "archived" => "archived" }
+    scope :public_count, -> { published.count }
   end
 end
