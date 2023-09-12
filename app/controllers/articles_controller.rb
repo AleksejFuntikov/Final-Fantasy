@@ -8,9 +8,7 @@ class ArticlesController < ApplicationController
     @articles = Article.published.page(params[:page]).per(25)
   end
 
-  def show
-    @comment = @article.comments.new
-  end
+  def show; end
 
   def new
     @article = Article.new
