@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 class ArticlesController < ApplicationController
+
   before_action :find_article, only: %i[show edit update destroy]
   rescue_from ActiveRecord::RecordNotFound, with: :article_not_found
 
