@@ -26,9 +26,6 @@ class CommentsController < ApplicationController
     redirect_to article_path(@article), status: :see_other
   end
   
-   def create 
-    @article = Article.find(params[:article_id])
-
   private
 
   def find_article
